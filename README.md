@@ -134,5 +134,5 @@ dotnet test
 
 ### GitLab images
 
-- [Tests tab](link)
+- [GitLab](https://gitlab.com/kdg-ti/programmeren-2-dotnet/25-26/inf201/projects/ebrahim.hdida/-/pipelines/2401428694)
 
