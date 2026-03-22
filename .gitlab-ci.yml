@@ -1,0 +1,45 @@
+image: mcr.microsoft.com/dotnet/sdk:9.0
+
+variables:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+  NUGET_PACKAGES: "$CI_PROJECT_DIR/.nuget/packages"
+  SOLUTION_PATH: "TournamentTracker.sln"
+  TEST_PROJECT_PATH: "TournamentTracker.Tests/TournamentTracker.Tests.csproj"
+  TEST_RESULTS_DIR: "TournamentTracker.Tests/TestResults"
+  COVERAGE_REPORT_DIR: "coveragereport"
+  REPORTGENERATOR_VERSION: "5.5.4"
+
+stages:
+  - build
+  - test
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - .nuget/packages/
+    - '**/obj/project.assets.json'
+    - '**/obj/*.csproj.nuget.*'
+  policy: pull-push
+
+before_script:
+  - dotnet restore "$SOLUTION_PATH"
+
+build:
+  stage: build
+  script:
+    - dotnet build "$SOLUTION_PATH" --no-restore
+
+test:
+  stage: test
+  script:
+    - dotnet test "$TEST_PROJECT_PATH" --no-restore --logger:junit --collect:"XPlat Code Coverage"
+    - dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools --version "$REPORTGENERATOR_VERSION"
+    - ./tools/reportgenerator -reports:"$TEST_RESULTS_DIR/*/coverage.cobertura.xml" -targetdir:"$COVERAGE_REPORT_DIR" -reporttypes:"Html"
+  artifacts:
+    when: always
+    reports:
+      junit: TournamentTracker.Tests/TestResults/TestResults.xml
+    paths:
+      - TournamentTracker.Tests/TestResults/
+      - coveragereport/

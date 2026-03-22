@@ -1,0 +1,35 @@
+### 401
+# @no-cookie-jar
+# @no-redirect
+POST http://localhost:5199/api/championships
+Content-Type: application/json
+Accept: application/json
+
+{
+  "championshipEdition": "2030-01-01T00:00:00",
+  "hostCountry": "Testland",
+  "type": 0
+}
+
+# Expected: 401 Unauthorized
+# Reason: POST /api/championships is protected with [Authorize], so anonymous API writes fail without an MVC redirect.
+
+###
+
+### 201
+
+# @no-cookie-jar
+# @no-redirect
+POST http://localhost:5199/api/championships
+Content-Type: application/json
+Accept: application/json
+Cookie: .AspNetCore.Identity.Application=PASTE_AUTH_COOKIE_HERE
+
+{
+  "championshipEdition": "2030-01-01T00:00:00",
+  "hostCountry": "Testland",
+  "type": 0
+}
+
+# Expected: 201 Created
+# Reason: authenticated users are allowed to create championships through the API.

@@ -1,0 +1,45 @@
+﻿@model Team
+
+@{
+    ViewData["Title"] = "Add Team";
+}
+
+<h1>Add Team</h1>
+
+<form asp-action="Add" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Country" class="form-label"></label>
+        <input asp-for="Country" class="form-control" />
+        <span asp-validation-for="Country" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Coach" class="form-label"></label>
+        <input asp-for="Coach" class="form-control" />
+        <span asp-validation-for="Coach" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LogoImage" class="form-label"></label>
+        <input asp-for="LogoImage" class="form-control" />
+        <span asp-validation-for="LogoImage" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TeamValue" class="form-label"></label>
+        <input asp-for="TeamValue" class="form-control" />
+        <span asp-validation-for="TeamValue" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+

@@ -1,0 +1,33 @@
+﻿<h2>Teams in this group</h2>
+
+<table class="table table-striped" id="groupTeamsTable">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Points</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<h3>Add team to group</h3>
+
+<div class="row g-2 align-items-end">
+    <div class="col-md-6">
+        <label class="form-label">Team</label>
+        <select class="form-select" id="teamSelect"></select>
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Points</label>
+        <input class="form-control" id="pointsInput" type="number" value="0" min="0" />
+    </div>
+    <div class="col-md-3">
+        <button class="btn btn-primary w-100" id="addBtn">Add</button>
+    </div>
+</div>
+
+<div class="text-danger mt-2" id="errorBox"></div>
+
+<div id="groupMeta" data-group-id="@Model.Id"></div>
+<script src="~/js/group-details.js"></script>

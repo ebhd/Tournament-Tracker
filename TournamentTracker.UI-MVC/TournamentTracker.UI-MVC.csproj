@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>TournamentTracker.UI_MVC</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\TournamentTracker.BL\TournamentTracker.BL.csproj" />
+      <ProjectReference Include="..\TournamentTracker.DAL\TournamentTracker.DAL.csproj" />
+      <ProjectReference Include="..\TournamentTracker.Domain\TournamentTracker.Domain.csproj" />
+      <ProjectReference Include="..\TournamentTracker.UI-CA\TournamentTracker.UI-CA.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="KdGTI.AspNetCore.LiveMonitoring" Version="1.2.2" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.12" />
+    </ItemGroup>
+
+</Project>
