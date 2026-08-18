@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Team>
+
+
+<h1>Teams</h1>
+
+@if (!Model.Any())
+{
+    <p>No teams found</p>
+}
+else {
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Coach</th>
+            <th>Logo</th>
+            <th>Team value</th>
+            <th></th> @* column for Details link *@
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var team in Model)
+        {
+            <tr>
+                <td>@team.Name</td>
+                <td>@team.Country</td>
+                <td>@(string.IsNullOrWhiteSpace(team.Coach) ? "unknown" : team.Coach)</td>
+                <td>
+                    @team.LogoImage
+                </td>
+                <td>
+                    @(team.TeamValue.HasValue
+                        ? team.TeamValue.Value.ToString("C")
+                        : "unknown")
+                </td>
+                <td>
+                    <a asp-controller="Team"
+                       asp-action="Details"
+                       asp-route-id="@team.Id">
+                        Details
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    
+    
+}

@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Championships";
+}
+
+<h1>All Championships</h1>
+
+
+<table class="table table-striped" id="championshipsTable">
+    <thead>
+    <tr>
+        <th>Edition</th>
+        <th>Host Country</th>
+        <th>Type</th>
+        <th>#Groups</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<button id="reloadBtn" class="btn btn-secondary mb-3">Refresh championships list</button>
+
+@section Scripts {
+    <script src="~/js/championships.js" asp-append-version="true"></script>
+}

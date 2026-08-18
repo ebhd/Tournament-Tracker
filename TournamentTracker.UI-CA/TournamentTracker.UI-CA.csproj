@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+	  <RootNamespace>TournamentTracker.UI.CA</RootNamespace>
+	  <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TournamentTracker.BL\TournamentTracker.BL.csproj" />
+    <ProjectReference Include="..\TournamentTracker.Domain\TournamentTracker.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

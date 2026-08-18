@@ -1,0 +1,62 @@
+﻿@model Group
+
+@{
+    ViewData["Title"] = "Group Details";
+}
+
+<h2>Group Details</h2>
+
+<section class="my-3">
+    <div class="mb-3 row">
+        <span class="col-sm-2 fw-bold">Group code</span>
+        <span class="col-sm-10">@Model.GroupCode</span>
+    </div>
+    <div class="mb-3 row">
+        <span class="col-sm-2 fw-bold">Maximum teams</span>
+        <span class="col-sm-10">@Model.MaxTeams</span>
+    </div>
+    <div class="mb-3 row">
+        <span class="col-sm-2 fw-bold">Championship</span>
+        <span class="col-sm-10">@Model.Championship.HostCountry @Model.Championship.ChampionshipEdition.ToString("yyyy")</span>
+    </div>
+</section>
+
+<h2>Teams in this group</h2>
+
+<table class="table table-striped" id="groupTeamsTable">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Points</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<h3>Add team to group</h3>
+
+<form>
+    <div class="row g-2 align-items-end">
+        <div class="col-md-6">
+            <label class="form-label">Team</label>
+            <select class="form-select" id="teamSelect"></select>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Points</label>
+            <input class="form-control" id="pointsInput" type="number" value="0" min="0" />
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary w-100" id="addBtn">Add</button>
+        </div>
+    </div>
+</form>
+
+<div class="text-danger mt-2" id="errorBox"></div>
+
+<div id="groupMeta" data-group-id="@Model.Id"></div>
+
+@section Scripts
+{
+    <script src="~/js/group-details.js"></script>
+}

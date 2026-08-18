@@ -1,0 +1,16 @@
+﻿### Create Championship
+POST http://localhost:5199/api/championships
+Content-Type: application/json
+Accept: application/json
+
+{
+  "championshipEdition": "2025-10-01T00:00:00Z",
+  "hostCountry": "USA",
+  "type": 3
+}
+
+###
+
+### Get Teams
+GET http://localhost:5199/api/teams
+Accept: application/json
