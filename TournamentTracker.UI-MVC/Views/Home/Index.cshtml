@@ -1,8 +1,33 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Overview";
+    var joinUrl = User.Identity?.IsAuthenticated == true ? Url.Action("Add", "Team") : Url.Page("/Account/Login", new { area = "Identity" });
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="page-intro">
+    <div><span class="eyebrow">YOUR TOURNAMENT HQ</span><h1>The beautiful game.<br class="mobile-break" /> All in one place.</h1></div>
+</div>
+<section class="hero-panel" aria-labelledby="hero-title">
+    <div class="hero-copy">
+        <h2 id="hero-title">Keep your eye<br />on the <em>whole game.</em></h2>
+        <p>Explore the teams, follow the groups, and bring every championship into focus.</p>
+        <a class="btn btn-lime" asp-controller="Championship" asp-action="Index">Explore championships <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="pitch-art" aria-hidden="true">
+        <div class="pitch-topline"><span>THE WORLD'S GAME</span></div>
+        <img class="pitch-image" src="~/images/football-tactics.png" asp-append-version="true" width="1536" height="1024" alt="" decoding="async" />
+    </div>
+</section>
+<div class="section-heading"><div><span class="eyebrow">THE STARTING LINEUP</span><h2>Where would you like to go?</h2></div></div>
+<div class="destination-grid">
+    <a class="destination-card" asp-controller="Team" asp-action="Index">
+        <span class="destination-top"><span class="tile-icon" aria-hidden="true">◎</span><span class="card-index">01</span></span>
+        <h3>Meet the teams</h3><p>Discover the squads, their coaches, and the groups they belong to.</p><span class="card-link">Browse teams <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="destination-card" asp-controller="Championship" asp-action="Index">
+        <span class="destination-top"><span class="tile-icon" aria-hidden="true">⚑</span><span class="card-index">02</span></span>
+        <h3>Explore championships</h3><p>See the editions, host countries, and competitions that bring it all together.</p><span class="card-link">View championships <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="destination-card destination-accent" href="@joinUrl">
+        <span class="destination-top"><span class="tile-icon" aria-hidden="true">＋</span><span class="card-index">03</span></span>
+        <h3>Be part of the game</h3><p>Add your team and keep its details up to date. Your next chapter starts here.</p><span class="card-link">@(User.Identity?.IsAuthenticated == true ? "Add a team" : "Sign in to get started") <span aria-hidden="true">→</span></span>
+    </a>
 </div>

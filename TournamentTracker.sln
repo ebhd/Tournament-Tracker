@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TournamentTracker.BL", "Tou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TournamentTracker.UI-MVC", "TournamentTracker.UI-MVC\TournamentTracker.UI-MVC.csproj", "{19E90178-0D12-4356-BF41-07F98A0E0D11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TournamentTracker.Tests", "TournamentTracker.Tests\TournamentTracker.Tests.csproj", "{4A83C7DE-344E-4C27-9135-E7D5CB0AACC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{19E90178-0D12-4356-BF41-07F98A0E0D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19E90178-0D12-4356-BF41-07F98A0E0D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19E90178-0D12-4356-BF41-07F98A0E0D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A83C7DE-344E-4C27-9135-E7D5CB0AACC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A83C7DE-344E-4C27-9135-E7D5CB0AACC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A83C7DE-344E-4C27-9135-E7D5CB0AACC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A83C7DE-344E-4C27-9135-E7D5CB0AACC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

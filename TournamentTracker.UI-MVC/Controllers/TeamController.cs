@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TournamentTracker.BL;
 using TournamentTracker.UI_MVC.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace TournamentTracker.UI_MVC.Controllers;
 
@@ -20,6 +22,7 @@ public class TeamController : Controller
     }
     
     [HttpGet]
+    [Authorize]
     public IActionResult Add()
     {
         return View();
@@ -28,6 +31,7 @@ public class TeamController : Controller
     
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize]
     public IActionResult Add(NewTeamViewModel teamViewModel)
     {
         if (!ModelState.IsValid)
@@ -35,12 +39,16 @@ public class TeamController : Controller
             return View(teamViewModel);
         }
 
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrWhiteSpace(userId)) return Challenge();
+
         var createdTeam = _manager.AddTeam(
             teamViewModel.Name,
             teamViewModel.Country,
             teamViewModel.Coach,
             teamViewModel.LogoImage,
-            teamViewModel.TeamValue
+            teamViewModel.TeamValue,
+            userId
         );
 
         return RedirectToAction(nameof(Details), new { id = createdTeam.Id });

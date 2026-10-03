@@ -2,10 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TournamentTracker.DAL.EF;
 
-public class LeagueDbContext : DbContext
+public class LeagueDbContext : IdentityDbContext<IdentityUser>
 {
     public DbSet<Championship> Championships { get; set; }
     public DbSet<Team> Teams { get; set; }
@@ -19,6 +21,12 @@ public class LeagueDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Team>()
+            .HasOne<IdentityUser>()
+            .WithMany()
+            .HasForeignKey(team => team.MaintainerId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         // Championship 1 --- * Group
         modelBuilder.Entity<Group>()
@@ -45,10 +53,6 @@ public class LeagueDbContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlite("Data Source=./league.db");
-        }
         optionsBuilder.LogTo(message => Debug.WriteLine(message),
             LogLevel.Information);
 

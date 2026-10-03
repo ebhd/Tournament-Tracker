@@ -1,0 +1,72 @@
+@page
+@model TournamentTracker.UI_MVC.Areas.Identity.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<section class="row justify-content-center">
+    <div class="col-lg-8 col-xl-6">
+        <h1 class="mb-3">Sign in</h1>
+        <p class="text-muted">Use a seeded evaluator account or your own registered account.</p>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <form id="account" method="post" novalidate>
+                    <input asp-for="ReturnUrl" type="hidden" />
+
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.Email" class="form-label"></label>
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.Password" class="form-label"></label>
+                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input asp-for="Input.RememberMe" class="form-check-input" />
+                        <label asp-for="Input.RememberMe" class="form-check-label"></label>
+                    </div>
+
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <a asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-outline-secondary">Create account</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <section aria-labelledby="seeded-accounts-heading" class="card border-info-subtle bg-light">
+            <div class="card-body">
+                <h2 id="seeded-accounts-heading" class="h4">Seeded evaluator accounts</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr><td>lars@kdg.be</td><td>Password1!</td><td>user</td></tr>
+                        <tr><td>ebrahim@kdg.be</td><td>Password1!</td><td>user</td></tr>
+                        <tr><td>ayoub@kdg.be</td><td>Password1!</td><td>user</td></tr>
+                        <tr><td>ali@kdg.be</td><td>Password1!</td><td>admin</td></tr>
+                        <tr><td>chris@kdg.be</td><td>Password1!</td><td>admin</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,139 +1,64 @@
+<div align="center">
+
+
+<img src="docs/images/readme-banner.png" width="100%" alt="Tournament Tracker banner placeholder">
+
 # Tournament Tracker
 
-- Naam: Ebrahim Hdida
-- Studentennummer: 0173779-52
-- Academiejaar: 25-26
-- Klasgroep: INF201A
-- Onderwerp: Soccer Championship: Team _ - _ Group \* - 1 Championship
+**A learning project built to practise clean N-layer architecture and ASP.NET Core MVC.**
 
-## Sprint 1
+Manage football teams, groups, and championships while exploring separation of concerns, dependency injection, data access, and authentication.
 
-```mermaid
-classDiagram
-class Team
-class Group
-class Championship
+<p>
+  <img src="https://img.shields.io/badge/.NET-9-512BD4?logo=dotnet&amp;logoColor=white" alt=".NET 9">
+  <img src="https://img.shields.io/badge/ASP.NET_Core-MVC-123F32" alt="ASP.NET Core MVC">
+  <img src="https://img.shields.io/badge/Entity_Framework-Core-512BD4" alt="Entity Framework Core">
+  <img src="https://img.shields.io/badge/SQLite-003B57?logo=sqlite&amp;logoColor=white" alt="SQLite">
+</p>
 
-Team "*" -- "*" Group
-Championship "1" -- "*" Group
+[Features](#features) · [Architecture](#architecture) · [Getting Started](#getting-started)
+
+</div>
+
+## Features
+
+| | |
+|---|---|
+| **Tournament browsing** | Explore championships, groups, teams, coaches, and squad values. |
+| **Team management** | Add teams and manage group membership. |
+| **Authentication** | Register and sign in with ASP.NET Core Identity. |
+| **Authorization** | Protect changes with roles and team ownership checks. |
+
+## Architecture
+
+The focus is learning to keep presentation, business logic, and persistence separate, using shared domain models and interface-based services.
+
+| Project | Responsibility |
+|---|---|
+| `TournamentTracker.Domain` | Entities, relationships, and domain validation |
+| `TournamentTracker.BL` | Business logic and the manager interface |
+| `TournamentTracker.DAL` | Repositories, EF Core, SQLite, and seed data |
+| `TournamentTracker.UI-MVC` | MVC controllers, Razor views, and API endpoints |
+| `TournamentTracker.UI-CA` | Console interface using the same business layer |
+| `TournamentTracker.Tests` | Integration tests for application and security behavior |
+
+## Getting Started
+
+Install the **.NET 9 SDK**, then run these commands from the repository root:
+
+```bash
+dotnet restore
+dotnet run --project TournamentTracker.UI-MVC --launch-profile http
 ```
 
-## Sprint 3
+Open [localhost:5199](http://localhost:5199). The SQLite connection string is in `TournamentTracker.UI-MVC/appsettings.json`.
 
-### Beide zoekcriteria ingevuld
+**Demo data:** startup recreates and seeds the database, so changes and new accounts are reset on restart. See [authentication notes](AUTHENTICATION.md#run-and-verify) for demo accounts.
 
-```sql
-SELECT "g"."Id", "g"."ChampionshipId", "g"."GroupCode", "g"."MaxTeams"
-FROM "Groups" AS "g"
-WHERE "g"."GroupCode" = @__code_Value_0 AND "g"."MaxTeams" = @__maxTeams_Value_1
+Run the tests:
+
+```bash
+dotnet test TournamentTracker.Tests/TournamentTracker.Tests.csproj
 ```
 
-### Enkel zoeken op GroupCode
 
-```sql
-SELECT "g"."Id", "g"."ChampionshipId", "g"."GroupCode", "g"."MaxTeams"
-FROM "Groups" AS "g"
-WHERE "g"."GroupCode" = @__code_Value_0
-```
-
-### Enkel zoeken op MaxTeams
-
-```sql
-SELECT "g"."Id", "g"."ChampionshipId", "g"."GroupCode", "g"."MaxTeams"
-FROM "Groups" AS "g"
-WHERE "g"."MaxTeams" = @__maxTeams_Value_0
-```
-
-### Beide zoekcriteria leeg
-
-```sql
-SELECT "g"."Id", "g"."ChampionshipId", "g"."GroupCode", "g"."MaxTeams"
-FROM "Groups" AS "g"
-```
-
-## Sprint 4
-
-```mermaid
-classDiagram
-  class Championship {
-    +int Id
-    +DateTime ChampionshipEdition
-    +string HostCountry
-    +ChampionshipType Type
-    +ICollection~Group~ Groups
-  }
-
-  class Group {
-    +int Id
-    +char GroupCode
-    +int MaxTeams
-    +Championship Championship
-    +ICollection~GroupTeam~ Teams
-  }
-
-  class Team {
-    +int Id
-    +string Name
-    +string Country
-    +string Coach
-    +string LogoImage
-    +decimal? TeamValue
-    +ICollection~GroupTeam~ Groups
-  }
-
-  class GroupTeam {
-    +int GroupId
-    +int TeamId
-    +int Points
-  }
-
-  Championship "1" -- "*" Group
-  Group "1" -- "*" GroupTeam
-  Team "1" -- "*" GroupTeam
-
-  class ChampionshipType  {
-    <<Enumeration>>
-    WorldCup
-    EuroCup
-    CopaAmerica
-    AfricaCup
-    AsiaCup
-  }
-```
-
-## Sprint 6
-
-### Nieuwe Championship
-
-#### Request
-
-```http
-POST http://localhost:5199/api/championships
-Content-Type: application/json
-Accept: application/json
-
-{
-  "championshipEdition": "2025-10-01T00:00:00Z",
-  "hostCountry": "USA",
-  "type": 3
-}
-```
-
-#### Response
-
-```http
-HTTP/1.1 201 Created
-Content-Type: application/json; charset=utf-8
-Date: Tue, 18 Aug 2026 08:04:23 GMT
-Server: Kestrel
-Location: http://localhost:5199/api/championships/5
-Transfer-Encoding: chunked
-
-{
-  "id": 5,
-  "championshipEdition": "2025-10-01T00:00:00Z",
-  "hostCountry": "USA",
-  "type": "AfricaCup",
-  "groupCount": 0
-}
-```

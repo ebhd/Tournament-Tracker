@@ -19,6 +19,9 @@ public class Team : IValidatableObject
     [Range(0, double.MaxValue)]
     public decimal? TeamValue { get; set; }
 
+    // Null for teams created through the original, identity-free console workflow.
+    public string MaintainerId { get; set; }
+
     public ICollection<GroupTeam> Groups { get; set; } = new List<GroupTeam>();
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

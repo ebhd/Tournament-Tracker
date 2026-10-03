@@ -1,0 +1,8 @@
+@model Team
+<span class="team-crest">
+    <span class="team-avatar" aria-hidden="true">@(string.IsNullOrEmpty(Model.Country) ? "—" : Model.Country.Substring(0, Math.Min(2, Model.Country.Length)).ToUpperInvariant())</span>
+    @if (Uri.TryCreate(Model.LogoImage, UriKind.Absolute, out var logoUri) && (logoUri.Scheme == Uri.UriSchemeHttps || logoUri.Scheme == Uri.UriSchemeHttp))
+    {
+        <img class="team-logo" src="@Model.LogoImage" alt="@Model.Name crest" width="48" height="56" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+    }
+</span>

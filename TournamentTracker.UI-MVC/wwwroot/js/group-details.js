@@ -67,12 +67,19 @@ async function addTeamToGroup() {
 
     const res = await fetch(`/api/groups/${groupId}/teams`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "RequestVerificationToken": document.querySelector('[name="__RequestVerificationToken"]').value
+        },
         body: JSON.stringify({ teamId, points })
     });
 
     if (!res.ok) {
-        const errorMessage = await res.json();
+        if (res.status === 401 || res.status === 403) {
+            errorBox.textContent = "Please sign in to add a team to this group.";
+            return;
+        }
+        const errorMessage = await res.json().catch(() => "The request was rejected. Reload the page and try again.");
         errorBox.textContent = `Error ${res.status}: ${errorMessage}`;
         return;
     }

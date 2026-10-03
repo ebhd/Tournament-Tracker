@@ -1,51 +1,38 @@
-﻿@model IEnumerable<Team>
-
-
-<h1>Teams</h1>
-
-@if (!Model.Any())
-{
-    <p>No teams found</p>
+@model IEnumerable<Team>
+@{
+    ViewData["Title"] = "Teams";
 }
-else {
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Country</th>
-            <th>Coach</th>
-            <th>Logo</th>
-            <th>Team value</th>
-            <th></th> @* column for Details link *@
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var team in Model)
-        {
-            <tr>
-                <td>@team.Name</td>
-                <td>@team.Country</td>
-                <td>@(string.IsNullOrWhiteSpace(team.Coach) ? "unknown" : team.Coach)</td>
-                <td>
-                    @team.LogoImage
-                </td>
-                <td>
-                    @(team.TeamValue.HasValue
-                        ? team.TeamValue.Value.ToString("C")
-                        : "unknown")
-                </td>
-                <td>
-                    <a asp-controller="Team"
-                       asp-action="Details"
-                       asp-route-id="@team.Id">
-                        Details
-                    </a>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-    
-    
-    
-}
+<div class="page-intro">
+    <div><span class="eyebrow">THE CLUB DIRECTORY</span><h1>Meet the teams.</h1><p class="page-description">The squads, the coaches, and the stories behind the game.</p></div>
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+        <a class="btn btn-primary" asp-action="Add"><span aria-hidden="true">＋</span> Add team</a>
+    }
+</div>
+<div class="data-panel">
+    <div class="panel-heading"><h2>All teams</h2><span class="pill">Team directory</span></div>
+    @if (!Model.Any())
+    {
+        <div class="empty-state"><span class="tile-icon" aria-hidden="true">◎</span><h3>No teams yet</h3><p>Teams will appear here once they have been added.</p></div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped team-table">
+                <thead><tr><th scope="col">Team</th><th scope="col">Country</th><th scope="col">Coach</th><th scope="col">Squad value (EUR)</th><th scope="col"><span class="visually-hidden">View team</span></th></tr></thead>
+                <tbody>
+                @foreach (var team in Model)
+                {
+                    <tr>
+                        <td><div class="team-identity"><partial name="_TeamLogo" model="team" /><strong>@team.Name</strong></div></td>
+                        <td>@team.Country</td>
+                        <td>@(string.IsNullOrWhiteSpace(team.Coach) ? "unknown" : team.Coach)</td>
+                        <td class="value-cell">@(team.TeamValue.HasValue ? "€" + team.TeamValue.Value.ToString("N2", System.Globalization.CultureInfo.GetCultureInfo("en-GB")) : "unknown")</td>
+                        <td><a class="table-action" asp-action="Details" asp-route-id="@team.Id" aria-label="Details for @team.Name">Details <span aria-hidden="true">↗</span></a></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

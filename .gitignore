@@ -3,3 +3,9 @@
 /.vs/
 
 .idea/
+
+# Local SQLite databases and journals (created by the application).
+*.db
+*.db-shm
+*.db-wal
+*.db-journal

@@ -34,6 +34,14 @@ namespace TournamentTracker.DAL.EF;
         _context.SaveChanges();
     }
 
+    public void UpdateTeamValue(int teamId, decimal? teamValue)
+    {
+        var team = ReadTeam(teamId);
+        if (team == null) return;
+        team.TeamValue = teamValue;
+        _context.SaveChanges();
+    }
+
     public Group ReadGroupWithChampionship(int id)
     {
         return _context.Groups

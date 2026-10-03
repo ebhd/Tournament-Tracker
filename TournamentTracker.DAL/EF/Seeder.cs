@@ -38,12 +38,13 @@ public static class Seeder
             g5, g6, g7, g8,
             g9, g10, g11
         );
-        var t1 = new Team { Name = "Belgische National Team", Country = "Belgium", Coach = "A. Coach", LogoImage = "https://example.com/lions.png", TeamValue = 120.5m };
-        var t2 = new Team { Name = "France National Team", Country = "France", Coach = "B. Coach", LogoImage = "https://example.com/tigers.png", TeamValue = null };
-        var t3 = new Team { Name = "Spain National Team", Country = "Spain", Coach = "C. Coach", LogoImage = "https://example.com/eagles.png", TeamValue = 95.0m };
-        var t4 = new Team { Name = "Germany National Team", Country = "Germany", Coach = "D. Coach", LogoImage = "https://example.com/sharks.png", TeamValue = 150.0m };
-        var t5 = new Team { Name = "Italy National Team", Country = "Italy", Coach = "E. Coach", LogoImage = "https://example.com/wolves.png", TeamValue = 80.0m };
-        var t6 = new Team { Name = "Portugal National Team", Country = "Portugal", Coach = "F. Coach", LogoImage = "https://example.com/dragons.png", TeamValue = 110.0m };
+        // Real-world seed snapshot; sources and EUR units are documented in TEAM_DATA_SOURCES.md.
+        var t1 = new Team { Name = "Belgische National Team", Country = "Belgium", Coach = "Mark van Bommel", LogoImage = "https://tmssl.akamaized.net/images/wappen/big/3382.png", TeamValue = 547_500_000m };
+        var t2 = new Team { Name = "France National Team", Country = "France", Coach = "Zinedine Zidane", LogoImage = "https://tmssl.akamaized.net/images/wappen/big/3377.png", TeamValue = 1_520_000_000m };
+        var t3 = new Team { Name = "Spain National Team", Country = "Spain", Coach = "Luis de la Fuente", LogoImage = "https://tmssl.akamaized.net/images/wappen/big/3375.png", TeamValue = 1_220_000_000m };
+        var t4 = new Team { Name = "Germany National Team", Country = "Germany", Coach = "Jürgen Klopp", LogoImage = "https://tmssl.akamaized.net/images/wappen/big/3262.png", TeamValue = 947_000_000m };
+        var t5 = new Team { Name = "Italy National Team", Country = "Italy", Coach = "Roberto Mancini", LogoImage = "https://tmssl.akamaized.net/images/wappen/big/3376.png", TeamValue = 833_500_000m };
+        var t6 = new Team { Name = "Portugal National Team", Country = "Portugal", Coach = "Jorge Jesus", LogoImage = "https://tmssl.akamaized.net/images/wappen/big/3300.png", TeamValue = 1_010_000_000m };
 
         teams.AddRange(t1, t2, t3, t4, t5, t6);
 

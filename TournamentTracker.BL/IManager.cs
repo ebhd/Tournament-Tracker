@@ -9,7 +9,8 @@ public interface IManager
     IEnumerable<Team> GetAllTeams();
     IEnumerable<Team> GetAllTeamsWithGroups();
     IEnumerable<Team> GetTeamsByCountry(string country);
-    Team AddTeam(string name, string country, string coach, string logoImage, decimal? teamValue);
+    Team AddTeam(string name, string country, string coach, string logoImage, decimal? teamValue, string maintainerId = null);
+    bool UpdateTeamValue(int teamId, decimal? teamValue, string userId, bool isAdmin);
 
     Group GetGroupWithChampionship(int id);
     IEnumerable<Group> GetAllGroups();

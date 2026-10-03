@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TournamentTracker.BL;
 using TournamentTracker.UI_MVC.Models.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TournamentTracker.UI_MVC.Controllers.Api;
 
@@ -46,6 +47,8 @@ public class ChampionshipsApiController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
+    [ValidateAntiForgeryToken]
     public ActionResult<ChampionshipDto> AddChampionship(NewChampionshipDto championshipDto)
     {
         var createdChampionship = _manager.AddChampionship(

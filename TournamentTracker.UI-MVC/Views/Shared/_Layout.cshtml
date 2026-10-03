@@ -1,64 +1,63 @@
-﻿<!DOCTYPE html>
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - Team Management</title>
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#123f32" />
+    <title>@ViewData["Title"] - Tournament Tracker</title>
+    <link rel="icon" type="image/png" href="~/images/tournament-tracker-favicon.png" asp-append-version="true" />
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Team" asp-action="Index">TournamentTracker</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+    <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Main navigation">
+        <div class="container site-container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <img class="brand-mark" src="~/images/tournament-tracker-logo-light.png" asp-append-version="true" width="64" height="44" alt="" />
+                <span>Tournament<span class="brand-sub">TRACKER</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Team" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Team" asp-action="Add">
-                            Add Team
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Championship" asp-action="Index">Championships</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                    <li class="nav-item">
-                        <partial name="_LiveMonitoringLinkPartial" />
-                    </li>
-
+            <div id="main-navigation" class="navbar-collapse collapse">
+                <ul class="navbar-nav primary-nav mx-lg-auto">
+                    <li class="nav-item"><a class="nav-link @(currentController == "Home" && currentAction == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link @(currentController == "Team" ? "active" : "")" asp-area="" asp-controller="Team" asp-action="Index">Teams</a></li>
+                    <li class="nav-item"><a class="nav-link @(currentController == "Championship" || currentController == "Group" ? "active" : "")" asp-area="" asp-controller="Championship" asp-action="Index">Championships</a></li>
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Team" asp-action="Add">Add team</a></li>
+                    }
                 </ul>
+                <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
 </header>
-<div class="container">
-    <main role="main" class="pb-3">
+<div class="container site-container page-shell">
+    <main id="main-content" tabindex="-1">
         @RenderBody()
     </main>
 </div>
-
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2025 - Ebrahim Hdida - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+<footer class="site-footer">
+    <div class="container site-container footer-content">
+        <span><strong>Tournament Tracker</strong><span class="footer-credit"> &copy; 2025 Ebrahim Hdida</span></span>
+        <div class="footer-links">
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <partial name="_LiveMonitoringLinkPartial" />
+        </div>
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
-
 </body>
 </html>

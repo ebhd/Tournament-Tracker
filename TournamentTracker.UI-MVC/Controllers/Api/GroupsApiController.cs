@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TournamentTracker.BL;
 using TournamentTracker.UI_MVC.Models.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TournamentTracker.UI_MVC.Controllers.Api;
 
@@ -51,6 +52,8 @@ public class GroupsApiController : ControllerBase
     }
 
     [HttpPost("{groupId}/teams")]
+    [Authorize]
+    [ValidateAntiForgeryToken]
     public ActionResult<GroupTeamDto> AddTeam(int groupId, NewGroupTeamDto groupTeamDto)
     {
         var group = _manager.GetGroupWithChampionship(groupId);

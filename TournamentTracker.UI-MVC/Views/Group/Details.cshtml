@@ -4,9 +4,10 @@
     ViewData["Title"] = "Group Details";
 }
 
-<h2>Group Details</h2>
+<a class="back-link" asp-controller="Championship" asp-action="Index">← Championships</a>
+<div class="page-intro"><div><span class="eyebrow">THE GROUP STAGE</span><h1>Group @Model.GroupCode</h1><p class="page-description">@Model.Championship.HostCountry · @Model.Championship.ChampionshipEdition.ToString("yyyy")</p></div><span class="pill">Up to @Model.MaxTeams teams</span></div>
 
-<section class="my-3">
+<section class="detail-summary">
     <div class="mb-3 row">
         <span class="col-sm-2 fw-bold">Group code</span>
         <span class="col-sm-10">@Model.GroupCode</span>
@@ -23,6 +24,7 @@
 
 <h2>Teams in this group</h2>
 
+<div class="data-panel table-responsive mb-4">
 <table class="table table-striped" id="groupTeamsTable">
     <thead>
     <tr>
@@ -33,17 +35,19 @@
     </thead>
     <tbody></tbody>
 </table>
+</div>
 
 <h3>Add team to group</h3>
 
-<form>
+<form class="editor-panel group-editor">
+    @Html.AntiForgeryToken()
     <div class="row g-2 align-items-end">
         <div class="col-md-6">
-            <label class="form-label">Team</label>
+            <label class="form-label" for="teamSelect">Team</label>
             <select class="form-select" id="teamSelect"></select>
         </div>
         <div class="col-md-3">
-            <label class="form-label">Points</label>
+            <label class="form-label" for="pointsInput">Points</label>
             <input class="form-control" id="pointsInput" type="number" value="0" min="0" />
         </div>
         <div class="col-md-3">

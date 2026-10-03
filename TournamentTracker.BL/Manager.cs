@@ -38,9 +38,10 @@ namespace TournamentTracker.BL;
             return _repository.ReadTeamsByCountry(country);
         }
 
-        public Team AddTeam(string name, string country, string coach, string logoImage, decimal? teamValue)
+        public Team AddTeam(string name, string country, string coach, string logoImage, decimal? teamValue, string maintainerId = null)
         {
             var team = new Team { Name = name, Country = country, Coach = coach, LogoImage = logoImage, TeamValue = teamValue };
+            team.MaintainerId = maintainerId;
 
             var validationResults = new List<ValidationResult>();
             bool success = Validator.TryValidateObject(team,
@@ -59,6 +60,21 @@ namespace TournamentTracker.BL;
 
             _repository.CreateTeam(team);
             return team;
+        }
+
+        public bool UpdateTeamValue(int teamId, decimal? teamValue, string userId, bool isAdmin)
+        {
+            var team = _repository.ReadTeam(teamId);
+            if (team == null || string.IsNullOrWhiteSpace(userId) ||
+                (!isAdmin && team.MaintainerId != userId))
+            {
+                return false;
+            }
+
+            Validator.ValidateProperty(teamValue,
+                new ValidationContext(team) { MemberName = nameof(Team.TeamValue) });
+            _repository.UpdateTeamValue(teamId, teamValue);
+            return true;
         }
 
         public Group GetGroupWithChampionship(int id)

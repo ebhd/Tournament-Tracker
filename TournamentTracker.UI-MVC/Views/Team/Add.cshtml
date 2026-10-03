@@ -4,9 +4,12 @@
     ViewData["Title"] = "Add Team";
 }
 
-<h1>Add Team</h1>
+<a class="back-link" asp-action="Index">← Back to teams</a>
+<div class="page-intro"><div><span class="eyebrow">BUILD YOUR LINEUP</span><h1>Add a team.</h1><p class="page-description">Give your team a place in the competition.</p></div></div>
 
-<form asp-action="Add" method="post">
+<form asp-action="Add" method="post" class="editor-panel">
+    <h2>Team information</h2>
+    <p class="text-muted mb-4">Start with the basics. You can manage the team value from its details page.</p>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="mb-3">
@@ -34,7 +37,7 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="TeamValue" class="form-label">Team value</label>
+        <label asp-for="TeamValue" class="form-label">Team value (EUR)</label>
         <input asp-for="TeamValue" class="form-control" />
         <span asp-validation-for="TeamValue" class="text-danger"></span>
     </div>

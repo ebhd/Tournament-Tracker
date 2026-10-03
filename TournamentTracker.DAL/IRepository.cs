@@ -10,6 +10,7 @@ public interface IRepository
     IEnumerable<Team> ReadAllTeamsWithGroups();
     IEnumerable<Team> ReadTeamsByCountry(string country);
     void CreateTeam(Team team);
+    void UpdateTeamValue(int teamId, decimal? teamValue);
 
     Group ReadGroupWithChampionship(int id);
     IEnumerable<Group> ReadAllGroups();

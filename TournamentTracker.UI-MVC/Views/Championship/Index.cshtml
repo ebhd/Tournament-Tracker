@@ -2,8 +2,14 @@
     ViewData["Title"] = "Championships";
 }
 
-<h1>All Championships</h1>
+<div class="page-intro">
+    <div><span class="eyebrow">THE WORLD STAGE</span><h1>Championships.</h1><p class="page-description">Every edition. Every host. Explore the competitions.</p></div>
+    <button id="reloadBtn" class="btn btn-outline-secondary">Refresh list <span aria-hidden="true">↻</span></button>
+</div>
 
+<div class="data-panel">
+<div class="panel-heading"><h2>All championships</h2><span class="pill">Competition directory</span></div>
+<div class="table-responsive">
 
 <table class="table table-striped" id="championshipsTable">
     <thead>
@@ -16,7 +22,8 @@
     </thead>
     <tbody></tbody>
 </table>
-<button id="reloadBtn" class="btn btn-secondary mb-3">Refresh championships list</button>
+</div>
+</div>
 
 @section Scripts {
     <script src="~/js/championships.js" asp-append-version="true"></script>
