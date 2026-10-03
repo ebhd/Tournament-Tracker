@@ -38,7 +38,7 @@ public static class Seeder
             g5, g6, g7, g8,
             g9, g10, g11
         );
-        // Real-world seed snapshot; sources and EUR units are documented in TEAM_DATA_SOURCES.md.
+        // Fixed demonstration snapshot; squad market values are estimates in euros.
         var t1 = new Team { Name = "Belgische National Team", Country = "Belgium", Coach = "Mark van Bommel", LogoImage = "https://tmssl.akamaized.net/images/wappen/big/3382.png", TeamValue = 547_500_000m };
         var t2 = new Team { Name = "France National Team", Country = "France", Coach = "Zinedine Zidane", LogoImage = "https://tmssl.akamaized.net/images/wappen/big/3377.png", TeamValue = 1_520_000_000m };
         var t3 = new Team { Name = "Spain National Team", Country = "Spain", Coach = "Luis de la Fuente", LogoImage = "https://tmssl.akamaized.net/images/wappen/big/3375.png", TeamValue = 1_220_000_000m };

@@ -53,7 +53,7 @@ dotnet run --project TournamentTracker.UI-MVC --launch-profile http
 
 Open [localhost:5199](http://localhost:5199). The SQLite connection string is in `TournamentTracker.UI-MVC/appsettings.json`.
 
-**Demo data:** startup recreates and seeds the database, so changes and new accounts are reset on restart. See [authentication notes](AUTHENTICATION.md#run-and-verify) for demo accounts.
+**Demo data:** startup recreates and seeds the database, so changes and new accounts are reset on restart.
 
 Run the tests:
 

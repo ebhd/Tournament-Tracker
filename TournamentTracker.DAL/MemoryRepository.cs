@@ -45,7 +45,7 @@ public class MemoryRepository : IRepository
         _groups.Add(g8);
 
         // Teams
-        // Real-world seed snapshot; sources and EUR units are documented in TEAM_DATA_SOURCES.md.
+        // Fixed demonstration snapshot; squad market values are estimates in euros.
         var t1 = new Team { Id = 1, Name = "Belgische National Team", Country = "Belgium", Coach = "Mark van Bommel", LogoImage = "https://tmssl.akamaized.net/images/wappen/big/3382.png", TeamValue = 547_500_000m };
         var t2 = new Team { Id = 2, Name = "France National Team", Country = "France", Coach = "Zinedine Zidane", LogoImage = "https://tmssl.akamaized.net/images/wappen/big/3377.png", TeamValue = 1_520_000_000m };
         var t3 = new Team { Id = 3, Name = "Spain National Team", Country = "Spain", Coach = "Luis de la Fuente", LogoImage = "https://tmssl.akamaized.net/images/wappen/big/3375.png", TeamValue = 1_220_000_000m };
